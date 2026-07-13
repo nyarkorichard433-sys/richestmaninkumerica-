@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The New African Dream — Building Wealth, Legacy, and Freedom in the 21st Century. The groundbreaking book series by Richard Nyarko.">
+<title>The New African Dream — Richard Nyarko</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500;600;700&family=Cinzel:wght@400;600;700;900&display=swap');
+
+/* ── RESET & BASE ─────────────────────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+:root {
+  --gold: #B8860B;
+  --gold-light: #FFD700;
+  --gold-pale: #DAA520;
+  --gold-dim: #8a6420;
+  --black: #050810;
+  --black-2: #080d18;
+  --navy: #0d1628;
+  --navy-2: #131f36;
+  --cream: #F5F0E5;
+  --cream-dim: #c8b888;
+  --white: #FFFFFF;
+  --grey: #888888;
+  --font-display: 'Cinzel', serif;
+  --font-body: 'Cormorant Garamond', serif;
+  --font-ui: 'Jost', sans-serif;
+}
+
+body {
+  background: var(--black);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+/* ── SCROLLBAR ────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+/* ── CANVAS BACKGROUND ────────────────────────────────────────── */
+#bgCanvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ── NAV ──────────────────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.4s ease;
+  background: transparent;
+}
+
+nav.scrolled {
+  background: rgba(5, 8, 16, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(184, 134, 11, 0.2);
+  padding: 12px 5%;
+}
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover { color: var(--gold-light); }
+
+.nav-cta {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: var(--gold);
+  padding: 9px 22px;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-weight: 600;
+}
+
+.nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+
+.nav-hamburger span {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: var(--gold);
+  transition: all 0.3s;
+}
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 5% 100px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.hero-pattern {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(184,134,11,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 20% 80%, rgba(46,64,87,0.3) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(184,134,11,0.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.hero-kente {
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 60px,
+      rgba(184,134,11,0.03) 60px,
+      rgba(184,134,11,0.03) 61px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 60px,
+      rgba(184,134,11,0.03) 60px,
+      rgba(184,134,11,0.03) 61px
+    );
+  pointer-events: none;
+}
+
+.hero-inner { position: relative; z-index: 2; max-width: 860px; }
+
+.hero-eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.2s forwards;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.hero-eyebrow::before,
+.hero-eyebrow::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.6;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 8vw, 6rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  margin-bottom: 1.2rem;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.4s forwards;
+}
+
+.hero-title .line-gold {
+  display: block;
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 40%, var(--gold-pale) 70%, var(--gold-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+}
+
+.hero-title .line-white {
+  display: block;
+  color: var(--white);
+}
+
+.hero-tagline {
+  font-family: var(--font-body);
+  font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+  font-style: italic;
+  color: var(--cream-dim);
+  margin-bottom: 0.8rem;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.6s forwards;
+  letter-spacing: 0.02em;
+}
+
+.hero-sub {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(184,134,11,0.7);
+  margin-bottom: 3rem;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.75s forwards;
+}
+
+.hero-divider {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 0 auto 3rem;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 0.85s forwards;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 1s forwards;
+}
+
+.btn-primary {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--black);
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  padding: 16px 36px;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(184,134,11,0.4); }
+.btn-primary:hover::before { opacity: 1; }
+
+.btn-secondary {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--gold);
+  background: transparent;
+  padding: 15px 36px;
+  text-decoration: none;
+  display: inline-block;
+  border: 1px solid rgba(184,134,11,0.4);
+  transition: all 0.35s ease;
+}
+
+.btn-secondary:hover {
+  border-color: var(--gold);
+  color: var(--gold-light);
+  background: rgba(184,134,11,0.08);
+  transform: translateY(-2px);
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeUp 0.9s ease 1.4s forwards;
+}
+
+.hero-scroll span {
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(184,134,11,0.5);
+}
+
+.scroll-line {
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(180deg, var(--gold), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+/* ── SECTIONS COMMON ──────────────────────────────────────────── */
+section {
+  position: relative;
+  z-index: 1;
+}
+
+.section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.section-eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.section-eyebrow::after {
+  content: '';
+  flex: 1;
+  max-width: 60px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.4;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+}
+
+.section-title .accent { color: var(--gold); }
+
+.section-body {
+  font-size: 1.15rem;
+  line-height: 1.85;
+  color: var(--cream-dim);
+  max-width: 680px;
+}
+
+/* ── ABOUT SECTION ────────────────────────────────────────────── */
+#about {
+  padding: 120px 0;
+  background: linear-gradient(180deg, var(--black) 0%, var(--black-2) 50%, var(--black) 100%);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.about-visual {
+  position: relative;
+}
+
+.about-book-frame {
+  position: relative;
+  padding: 3px;
+  background: linear-gradient(135deg, var(--gold), transparent 50%, var(--gold-dim));
+}
+
+.about-book-inner {
+  background: var(--navy);
+  padding: 50px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-book-inner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at center, rgba(184,134,11,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.book-number {
+  font-family: var(--font-display);
+  font-size: 7rem;
+  font-weight: 900;
+  color: rgba(184,134,11,0.08);
+  line-height: 1;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
+
+.book-series-label {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+}
+
+.book-title-visual {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.book-title-visual span {
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.book-subtitle-visual {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--cream-dim);
+  margin-bottom: 2rem;
+}
+
+.book-gold-rule {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 0 auto 1.5rem;
+}
+
+.book-status {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: var(--gold);
+  padding: 6px 16px;
+  font-weight: 700;
+}
+
+.about-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: var(--gold);
+  border-style: solid;
+  opacity: 0.6;
+}
+
+.about-corner.tl { top: -6px; left: -6px; border-width: 2px 0 0 2px; }
+.about-corner.tr { top: -6px; right: -6px; border-width: 2px 2px 0 0; }
+.about-corner.bl { bottom: -6px; left: -6px; border-width: 0 0 2px 2px; }
+.about-corner.br { bottom: -6px; right: -6px; border-width: 0 2px 2px 0; }
+
+.about-quote {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-left: 2px solid var(--gold);
+  background: rgba(184,134,11,0.05);
+}
+
+.about-quote p {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.7;
+}
+
+.about-quote cite {
+  display: block;
+  margin-top: 0.6rem;
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-style: normal;
+}
+
+/* ── THEMES ───────────────────────────────────────────────────── */
+#themes {
+  padding: 120px 0;
+  background: var(--black-2);
+  position: relative;
+  overflow: hidden;
+}
+
+#themes::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(184,134,11,0.4), transparent);
+}
+
+#themes::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(184,134,11,0.4), transparent);
+}
+
+.themes-header { margin-bottom: 60px; }
+
+.themes-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(184,134,11,0.15);
+}
+
+.theme-card {
+  background: var(--black-2);
+  padding: 36px 28px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  cursor: default;
+}
+
+.theme-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+}
+
+.theme-card:hover {
+  background: rgba(184,134,11,0.06);
+}
+
+.theme-card:hover::before { transform: scaleX(1); }
+
+.theme-icon {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  display: block;
+  filter: grayscale(0.3);
+}
+
+.theme-name {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--gold-light);
+  margin-bottom: 0.6rem;
+  text-transform: uppercase;
+}
+
+.theme-desc {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: rgba(197, 179, 136, 0.7);
+  line-height: 1.6;
+}
+
+.theme-num {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: rgba(184,134,11,0.06);
+  line-height: 1;
+}
+
+/* ── SERIES ───────────────────────────────────────────────────── */
+#series {
+  padding: 120px 0;
+  background: var(--black);
+}
+
+.series-header { margin-bottom: 70px; }
+
+.series-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: rgba(184,134,11,0.1);
+}
+
+.series-book {
+  background: var(--black);
+  padding: 48px 36px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.4s ease;
+}
+
+.series-book:hover { background: rgba(184,134,11,0.04); }
+
+.series-book-num {
+  font-family: var(--font-display);
+  font-size: 5rem;
+  font-weight: 900;
+  color: rgba(184,134,11,0.07);
+  line-height: 1;
+  position: absolute;
+  top: 20px;
+  right: 24px;
+}
+
+.series-label {
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.2rem;
+}
+
+.series-book-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 0.8rem;
+}
+
+.series-book-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+
+.series-book-desc {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: rgba(197,179,136,0.7);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.series-verse {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-style: italic;
+  color: rgba(184,134,11,0.6);
+  padding-top: 1rem;
+  border-top: 1px solid rgba(184,134,11,0.15);
+}
+
+.series-status {
+  display: inline-block;
+  margin-top: 1rem;
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  font-weight: 600;
+}
+
+.series-status.available { color: var(--black); background: var(--gold); }
+.series-status.coming { color: var(--gold); border: 1px solid rgba(184,134,11,0.3); }
+
+/* ── AUTHOR ───────────────────────────────────────────────────── */
+#author {
+  padding: 120px 0;
+  background: var(--black-2);
+  position: relative;
+}
+
+#author::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(184,134,11,0.4), transparent);
+}
+
+.author-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.author-visual {
+  position: relative;
+}
+
+.author-frame {
+  position: relative;
+  padding: 3px;
+  background: linear-gradient(135deg, var(--gold), transparent 50%, var(--gold-dim));
+}
+
+.author-photo {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: var(--navy);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.author-photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(184,134,11,0.1) 0%, transparent 70%);
+}
+
+.author-initials {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  font-weight: 700;
+  color: rgba(184,134,11,0.3);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.author-photo-label {
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(184,134,11,0.4);
+}
+
+.author-name-visual {
+  position: absolute;
+  bottom: -1px;
+  left: -3px; right: -3px;
+  background: linear-gradient(180deg, transparent, rgba(5,8,16,0.95));
+  padding: 40px 20px 20px;
+  text-align: center;
+}
+
+.author-name-visual h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.05em;
+}
+
+.author-name-visual span {
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.author-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 1.5rem;
+}
+
+.author-tag {
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(184,134,11,0.3);
+  padding: 5px 12px;
+}
+
+.author-content h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 0.5rem;
+}
+
+.author-content .author-title {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2rem;
+}
+
+.author-bio {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1.85;
+  color: var(--cream-dim);
+  margin-bottom: 1.5rem;
+}
+
+.author-books {
+  margin: 2rem 0;
+}
+
+.author-books-label {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+
+.author-book-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.author-book-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--cream);
+}
+
+.author-book-list li::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+.author-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 2rem;
+}
+
+.social-link {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  text-decoration: none;
+  padding: 8px 16px;
+  border: 1px solid rgba(255,255,255,0.12);
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.social-link:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(184,134,11,0.06);
+}
+
+/* ── WAITLIST ─────────────────────────────────────────────────── */
+#waitlist {
+  padding: 120px 0;
+  background: var(--black);
+  position: relative;
+  overflow: hidden;
+}
+
+.waitlist-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(184,134,11,0.1) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 0%, rgba(184,134,11,0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.waitlist-inner {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.waitlist-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+.waitlist-inner h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.waitlist-inner h2 .gold { color: var(--gold); }
+
+.waitlist-desc {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--cream-dim);
+  margin-bottom: 3rem;
+  line-height: 1.75;
+}
+
+.waitlist-form {
+  position: relative;
+}
+
+.form-group {
+  display: flex;
+  gap: 0;
+  margin-bottom: 1rem;
+}
+
+.waitlist-input {
+  flex: 1;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(184,134,11,0.25);
+  border-right: none;
+  padding: 16px 22px;
+  color: var(--cream);
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.waitlist-input::placeholder { color: rgba(197,179,136,0.4); }
+.waitlist-input:focus { border-color: var(--gold); background: rgba(184,134,11,0.05); }
+
+.waitlist-btn {
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  color: var(--black);
+  border: none;
+  padding: 16px 32px;
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.waitlist-btn:hover {
+  background: linear-gradient(135deg, var(--gold), var(--gold-pale));
+  transform: translateX(2px);
+}
+
+.form-note {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(184,134,11,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.form-note::before, .form-note::after {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: rgba(184,134,11,0.3);
+}
+
+.success-msg {
+  display: none;
+  padding: 20px;
+  background: rgba(184,134,11,0.1);
+  border: 1px solid rgba(184,134,11,0.3);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--gold-light);
+}
+
+/* ── MANIFESTO BAND ───────────────────────────────────────────── */
+#manifesto {
+  padding: 80px 0;
+  background: var(--navy);
+  border-top: 1px solid rgba(184,134,11,0.2);
+  border-bottom: 1px solid rgba(184,134,11,0.2);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.manifesto-text {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 3.5vw, 2.2rem);
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.4;
+  position: relative;
+  z-index: 1;
+}
+
+.manifesto-text .em1 {
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── FOOTER ───────────────────────────────────────────────────── */
+footer {
+  background: var(--black-2);
+  padding: 60px 5% 40px;
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid rgba(184,134,11,0.15);
+}
+
+.footer-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 50px;
+}
+
+.footer-brand-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.05em;
+}
+
+.footer-tagline {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: rgba(197,179,136,0.6);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.footer-contact {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: rgba(184,134,11,0.6);
+  line-height: 1.8;
+}
+
+.footer-col-title {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(184,134,11,0.2);
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-links a {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: rgba(197,179,136,0.6);
+  text-decoration: none;
+  transition: color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-links a::before {
+  content: '';
+  width: 12px;
+  height: 1px;
+  background: rgba(184,134,11,0.4);
+  transition: width 0.3s;
+}
+
+.footer-links a:hover { color: var(--gold-light); }
+.footer-links a:hover::before { width: 20px; background: var(--gold); }
+
+.footer-bottom {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-top: 30px;
+  border-top: 1px solid rgba(184,134,11,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-copy {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: rgba(184,134,11,0.35);
+}
+
+.footer-series {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: rgba(184,134,11,0.3);
+  text-transform: uppercase;
+}
+
+/* ── ANIMATIONS ───────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.8); }
+  50% { opacity: 1; transform: scaleY(1); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ── MOBILE ───────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .nav-links, .nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
+
+  .about-grid { grid-template-columns: 1fr; gap: 50px; }
+  .about-visual { max-width: 380px; margin: 0 auto; }
+
+  .themes-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .series-grid { grid-template-columns: 1fr; gap: 2px; }
+
+  .author-grid { grid-template-columns: 1fr; gap: 50px; }
+  .author-visual { max-width: 320px; margin: 0 auto; }
+
+  .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+
+  .form-group { flex-direction: column; }
+  .waitlist-input { border-right: 1px solid rgba(184,134,11,0.25); border-bottom: none; }
+  .waitlist-btn { padding: 14px 24px; }
+}
+
+@media (max-width: 600px) {
+  .themes-grid { grid-template-columns: 1fr; }
+  .hero-actions { flex-direction: column; align-items: center; }
+  .btn-primary, .btn-secondary { width: 100%; max-width: 300px; text-align: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ── MOBILE MENU ──────────────────────────────────────────────── */
+.mobile-menu {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(5,8,16,0.98);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-menu.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.mobile-menu a {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--white);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: color 0.3s;
+}
+
+.mobile-menu a:hover { color: var(--gold-light); }
+
+.mobile-close {
+  position: absolute;
+  top: 20px;
+  right: 5%;
+  background: none;
+  border: none;
+  color: var(--gold);
+  font-size: 1.5rem;
+  cursor: pointer;
+  font-family: var(--font-ui);
+  letter-spacing: 0.1em;
+}
+</style>
+</head>
+<body>
+
+<!-- Background Canvas -->
+<canvas id="bgCanvas"></canvas>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">✕ CLOSE</button>
+  <a href="#about" onclick="closeMobileMenu()">The Book</a>
+  <a href="#themes" onclick="closeMobileMenu()">Themes</a>
+  <a href="#series" onclick="closeMobileMenu()">The Series</a>
+  <a href="#author" onclick="closeMobileMenu()">Author</a>
+  <a href="#waitlist" onclick="closeMobileMenu()">Join Waitlist</a>
+</div>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">The New African Dream</a>
+  <ul class="nav-links">
+    <li><a href="#about">The Book</a></li>
+    <li><a href="#themes">Themes</a></li>
+    <li><a href="#series">The Series</a></li>
+    <li><a href="#author">Author</a></li>
+  </ul>
+  <a href="#waitlist" class="nav-cta">Join the Waitlist</a>
+  <button class="nav-hamburger" id="menuBtn" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Hero -->
+<section id="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-kente"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">The New African Dream Series</div>
+    <h1 class="hero-title">
+      <span class="line-gold">The New</span>
+      <span class="line-white">African Dream</span>
+    </h1>
+    <p class="hero-tagline">Building Wealth, Legacy, and Freedom in the 21st Century</p>
+    <p class="hero-sub">Richard Nyarko &nbsp;&bull;&nbsp; MBN Books &nbsp;&bull;&nbsp; Kumasi, Ghana</p>
+    <div class="hero-divider"></div>
+    <div class="hero-actions">
+      <a href="#waitlist" class="btn-primary">Join the Waitlist</a>
+      <a href="#about" class="btn-secondary">Discover the Book</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-book-frame">
+          <div class="about-corner tl"></div>
+          <div class="about-corner tr"></div>
+          <div class="about-corner bl"></div>
+          <div class="about-corner br"></div>
+          <div class="about-book-inner">
+            <div class="book-number">I</div>
+            <div class="book-series-label">The New African Dream &mdash; Book One</div>
+            <div class="book-title-visual">
+              The Richest Man in the<br>
+              <span>United States of Kumerica</span>
+            </div>
+            <div class="book-subtitle-visual">Ancient Laws of Gold for the Modern African</div>
+            <div class="book-gold-rule"></div>
+            <span class="book-status">Available Now</span>
+          </div>
+        </div>
+        <div class="about-quote">
+          <p>&ldquo;Most cemeteries are filled with people who never manifested. You are carrying something that was never meant to be buried.&rdquo;</p>
+          <cite>&mdash; Richard Nyarko</cite>
+        </div>
+      </div>
+
+      <div class="about-content reveal reveal-delay-2">
+        <div class="section-eyebrow">The Mission</div>
+        <h2 class="section-title">
+          This is not a book<br>about money.<br>
+          <span class="accent">It is a book about who you were<br>always meant to become.</span>
+        </h2>
+        <p class="section-body">The New African Dream is a groundbreaking series that takes the African reader on a single, continuous journey &mdash; from the first financial law applied to a single salary, to a business built and transferred across generations, to the civilisational transformation that becomes possible when an entire generation decides to build.</p>
+        <br>
+        <p class="section-body">Written by a pharmacy technician from Kwadaso, Kumasi &mdash; not a banker, not an economist, not a celebrity &mdash; this series proves that the laws of wealth work for everyone who applies them, in every city, at every income level.</p>
+        <br>
+        <p class="section-body">Set in Kumerica &mdash; where Bantama is Philadelphia, Adum is Manhattan, and Kwadaso is Florida &mdash; this is the African financial literacy framework the continent has been waiting for.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Themes -->
+<section id="themes">
+  <div class="section-inner">
+    <div class="themes-header">
+      <div class="section-eyebrow reveal">What You Will Learn</div>
+      <h2 class="section-title reveal reveal-delay-1">Eight Pillars of the<br><span class="accent">New African Dream</span></h2>
+    </div>
+    <div class="themes-grid">
+      <div class="theme-card reveal">
+        <div class="theme-num">01</div>
+        <span class="theme-icon">💰</span>
+        <div class="theme-name">Money</div>
+        <p class="theme-desc">The salary architecture, the wealth laws, and why a part of all you earn is yours to keep.</p>
+      </div>
+      <div class="theme-card reveal reveal-delay-1">
+        <div class="theme-num">02</div>
+        <span class="theme-icon">🏗️</span>
+        <div class="theme-name">Entrepreneurship</div>
+        <p class="theme-desc">From employee to builder. How to create enterprises that outlast their founders.</p>
+      </div>
+      <div class="theme-card reveal reveal-delay-2">
+        <div class="theme-num">03</div>
+        <span class="theme-icon">⚙️</span>
+        <div class="theme-name">Technology</div>
+        <p class="theme-desc">Blockchain, digital assets, and the tools that are democratising economic participation.</p>
+      </div>
+      <div class="theme-card reveal reveal-delay-3">
+        <div class="theme-num">04</div>
+        <span class="theme-icon">🤖</span>
+        <div class="theme-name">Artificial Intelligence</div>
+        <p class="theme-desc">The Kumerican who learns to use AI as a multiplier will dominate the next economy.</p>
+      </div>
+      <div class="theme-card reveal">
+        <div class="theme-num">05</div>
+        <span class="theme-icon">⚡</span>
+        <div class="theme-name">Character</div>
+        <p class="theme-desc">Character capital &mdash; the invisible wealth that creates all visible wealth.</p>
+      </div>
+      <div class="theme-card reveal reveal-delay-1">
+        <div class="theme-num">06</div>
+        <span class="theme-icon">👑</span>
+        <div class="theme-name">Leadership</div>
+        <p class="theme-desc">Building the influence infrastructure that moves people, resources, and nations.</p>
+      </div>
+      <div class="theme-card reveal reveal-delay-2">
+        <div class="theme-num">07</div>
+        <span class="theme-icon">📈</span>
+        <div class="theme-name">Investing</div>
+        <p class="theme-desc">Land, stocks, fixed deposits, and the patient investor who lets compound time do the work.</p>
+      </div>
+      <div class="theme-card reveal reveal-delay-3">
+        <div class="theme-num">08</div>
+        <span class="theme-icon">🌍</span>
+        <div class="theme-name">Legacy</div>
+        <p class="theme-desc">What your granddaughter will inherit besides photographs. Building across generations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Series -->
+<section id="series">
+  <div class="section-inner">
+    <div class="series-header">
+      <div class="section-eyebrow reveal">A Three-Book Journey</div>
+      <h2 class="section-title reveal reveal-delay-1">The Complete<br><span class="accent">New African Dream</span><br>Series</h2>
+    </div>
+    <div class="series-grid">
+      <div class="series-book reveal">
+        <div class="series-book-num">I</div>
+        <div class="series-label">Book One &mdash; Available</div>
+        <h3 class="series-book-title">The Richest Man in the United States of Kumerica</h3>
+        <div class="series-book-subtitle">Ancient Laws of Gold for the Modern African</div>
+        <p class="series-book-desc">The foundation. Twenty chapters of ancient financial laws applied to the streets of Kumasi. The salary architecture. The debt exit. The poverty mindset. The legacy vision. The sowing season.</p>
+        <div class="series-verse">&ldquo;Let us not become weary in doing good, for at the proper time we will reap a harvest.&rdquo; &mdash; Galatians 6:9</div>
+        <span class="series-status available">Available Now</span>
+      </div>
+      <div class="series-book reveal reveal-delay-2">
+        <div class="series-book-num">II</div>
+        <div class="series-label">Book Two &mdash; 2027</div>
+        <h3 class="series-book-title">Sons of the Harvest</h3>
+        <div class="series-book-subtitle">Building the Inheritance Your Fathers Planted and Never Lived to Reap</div>
+        <p class="series-book-desc">The continuation. From stable to building. The Kumerican business. The investment portfolio. The succession plan. The legal transfer. Breaking the generational cycle permanently.</p>
+        <div class="series-verse">&ldquo;Those who sow in tears will reap with songs of joy.&rdquo; &mdash; Psalm 126:5</div>
+        <span class="series-status coming">Coming 2027</span>
+      </div>
+      <div class="series-book reveal reveal-delay-3">
+        <div class="series-book-num">III</div>
+        <div class="series-label">Book Three &mdash; 2028</div>
+        <h3 class="series-book-title">The Builders Generation</h3>
+        <div class="series-book-subtitle">How Ordinary Africans Create Extraordinary Nations</div>
+        <p class="series-book-desc">The civilisational crowning work. What happens when an entire generation decides to build simultaneously. The macro argument. The continental transformation. The New African Dream fulfilled.</p>
+        <div class="series-verse">&ldquo;For I know the plans I have for you &mdash; plans to give you hope and a future.&rdquo; &mdash; Jeremiah 29:11</div>
+        <span class="series-status coming">Coming 2028</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Manifesto Band -->
+<section id="manifesto">
+  <div class="section-inner">
+    <p class="manifesto-text reveal">
+      <span class="em1">We are not preparing students for the world.</span><br>
+      We are preparing them to change it.
+    </p>
+  </div>
+</section>
+
+<!-- Author -->
+<section id="author">
+  <div class="section-inner">
+    <div class="author-grid">
+      <div class="author-visual reveal">
+        <div class="author-frame">
+          <div class="author-photo">
+            <div class="author-initials">RN</div>
+            <div class="author-photo-label">Photo Coming Soon</div>
+            <div class="author-name-visual">
+              <h3>Richard Nyarko</h3>
+              <span>Author &bull; Founder &bull; Educator</span>
+            </div>
+          </div>
+        </div>
+        <div class="author-tags">
+          <span class="author-tag">Kumasi, Ghana</span>
+          <span class="author-tag">MBN Books</span>
+          <span class="author-tag">Cardano ₳</span>
+          <span class="author-tag">Rich-Dad Foundation</span>
+        </div>
+      </div>
+
+      <div class="author-content reveal reveal-delay-2">
+        <div class="section-eyebrow">The Author</div>
+        <h2>Richard<br><span style="color:var(--gold)">Nyarko</span></h2>
+        <div class="author-title">CEO, Rich-Dad Foundation &bull; Financial Literacy Advocate &bull; Cardano Enthusiast</div>
+        <p class="author-bio">Richard Nyarko was born in Kumasi, Ghana &mdash; in Kwadaso, Florida &mdash; the neighbourhood that became the heart of the Kumerica framework. A pharmacy technician and graduate of KSTU, he spent five years earning a salary and saving nothing. Then he found the laws.</p>
+        <p class="author-bio">He did not write this series as a wealthy man looking back. He wrote it as an ordinary person looking forward &mdash; applying the same laws he is teaching, in the same city where his readers live, with the same income his readers earn.</p>
+        <p class="author-bio">Richard is the founder and CEO of the Rich-Dad Foundation, a financial literacy organisation dedicated to empowering young Africans with the knowledge and tools to build lasting wealth across generations.</p>
+
+        <div class="author-books">
+          <div class="author-books-label">Published Works</div>
+          <ul class="author-book-list">
+            <li>Stepping Up the Plate</li>
+            <li>The Richest Man in the United States of Kumerica (Second Edition)</li>
+            <li>Sons of the Harvest <em style="color:var(--gold);font-size:0.85rem">&mdash; Coming 2027</em></li>
+            <li>The Builders Generation <em style="color:var(--gold);font-size:0.85rem">&mdash; Coming 2028</em></li>
+          </ul>
+        </div>
+
+        <div class="author-socials">
+          <a href="https://www.instagram.com/richdad_2000" target="_blank" class="social-link">📸 Instagram</a>
+          <a href="https://www.youtube.com/@richdad4109" target="_blank" class="social-link">▶ YouTube</a>
+          <a href="https://wa.me/233559164614" target="_blank" class="social-link">💬 WhatsApp</a>
+          <a href="mailto:nyarkorichard433@gmail.com" class="social-link">✉ Email</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Waitlist -->
+<section id="waitlist">
+  <div class="waitlist-bg"></div>
+  <div class="section-inner">
+    <div class="waitlist-inner">
+      <span class="waitlist-icon reveal">✦</span>
+      <h2 class="reveal reveal-delay-1">
+        Be Among the First<br>to Read <span class="gold">The New African Dream</span>
+      </h2>
+      <p class="waitlist-desc reveal reveal-delay-2">
+        Join thousands of Africans &mdash; at home and in the diaspora &mdash; who are building the wealth, legacy, and freedom this continent has always deserved. Enter your email to receive launch updates, exclusive excerpts, and the free Kumerican Laws guide.
+      </p>
+      <div class="waitlist-form reveal reveal-delay-3">
+        <form action="https://github.us9.list-manage.com/subscribe/post?u=493ef832b32db5a7613684837&amp;id=6c18939ff9&amp;f_id=00881be1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" onsubmit="handleMailchimp(event)">
+          <div class="form-group">
+            <input type="email" name="EMAIL" class="waitlist-input" id="emailInput" placeholder="Your email address" autocomplete="email" required>
+            <div style="position:absolute;left:-5000px;" aria-hidden="true">
+              <input type="text" name="b_493ef832b32db5a7613684837_6c18939ff9" tabindex="-1" value="">
+            </div>
+            <button type="submit" class="waitlist-btn">Join Now ✦</button>
+          </div>
+          <div class="form-note">No spam &bull; Free to join &bull; Unsubscribe anytime</div>
+          <div class="success-msg" id="successMsg">
+            ✦ &nbsp; You have joined the movement. A confirmation is on its way. Welcome to The New African Dream.
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-name">The New African Dream</div>
+      <p class="footer-tagline">Building Wealth, Legacy, and Freedom in the 21st Century. A three-book series by Richard Nyarko, published by MBN Books, Kumasi, Ghana.</p>
+      <div class="footer-contact">
+        📞 &nbsp;+233 559 164 614<br>
+        ✉ &nbsp;nyarkorichard433@gmail.com<br>
+        🌍 &nbsp;Kumasi, Ghana
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="#about">The Book</a></li>
+        <li><a href="#themes">Key Themes</a></li>
+        <li><a href="#series">The Series</a></li>
+        <li><a href="#author">About Richard</a></li>
+        <li><a href="#waitlist">Join Waitlist</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Connect</div>
+      <ul class="footer-links">
+        <li><a href="https://www.instagram.com/richdad_2000" target="_blank">Instagram</a></li>
+        <li><a href="https://www.youtube.com/@richdad4109" target="_blank">YouTube</a></li>
+        <li><a href="https://wa.me/233559164614" target="_blank">WhatsApp</a></li>
+        <li><a href="mailto:nyarkorichard433@gmail.com">Email</a></li>
+        <li><a href="https://richestmaninkumerica.lovable.app" target="_blank">Book One Site</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Richard Nyarko &bull; Rich-Dad Foundation &bull; All Rights Reserved</div>
+    <div class="footer-series">The New African Dream &bull; MBN Books &bull; Kumasi, Ghana</div>
+  </div>
+</footer>
+
+<script>
+/* ── PARTICLE CANVAS ─────────────────────────────────────────── */
+const canvas = document.getElementById('bgCanvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let W, H;
+
+function resizeCanvas() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+
+function initParticles() {
+  particles = [];
+  const count = Math.floor((W * H) / 22000);
+  for (let i = 0; i < count; i++) {
+    particles.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: Math.random() * 1.5 + 0.3,
+      a: Math.random() * Math.PI * 2,
+      speed: Math.random() * 0.3 + 0.08,
+      opacity: Math.random() * 0.5 + 0.1,
+      gold: Math.random() > 0.5,
+    });
+  }
+}
+
+function drawParticles() {
+  ctx.clearRect(0, 0, W, H);
+  particles.forEach(p => {
+    p.y -= p.speed;
+    p.x += Math.sin(p.a) * 0.3;
+    p.a += 0.01;
+    if (p.y < -5) { p.y = H + 5; p.x = Math.random() * W; }
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = p.gold
+      ? `rgba(184,134,11,${p.opacity})`
+      : `rgba(197,179,136,${p.opacity * 0.4})`;
+    ctx.fill();
+  });
+  requestAnimationFrame(drawParticles);
+}
+
+window.addEventListener('resize', () => { resizeCanvas(); initParticles(); });
+resizeCanvas();
+initParticles();
+drawParticles();
+
+/* ── NAV SCROLL ──────────────────────────────────────────────── */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+/* ── MOBILE MENU ─────────────────────────────────────────────── */
+const mobileMenu = document.getElementById('mobileMenu');
+const menuBtn = document.getElementById('menuBtn');
+const mobileClose = document.getElementById('mobileClose');
+
+menuBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
+mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+
+function closeMobileMenu() { mobileMenu.classList.remove('open'); }
+
+/* ── SCROLL REVEAL ───────────────────────────────────────────── */
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+revealEls.forEach(el => observer.observe(el));
+
+/* ── MAILCHIMP FORM ──────────────────────────────────────────── */
+function handleMailchimp(e) {
+  const email = document.getElementById('emailInput').value.trim();
+  const success = document.getElementById('successMsg');
+  const btn = document.querySelector('.waitlist-btn');
+
+  if (!email || !email.includes('@')) {
+    e.preventDefault();
+    document.getElementById('emailInput').style.borderColor = '#8B0000';
+    document.getElementById('emailInput').focus();
+    return;
+  }
+
+  btn.textContent = 'Joining...';
+  btn.disabled = true;
+
+  // Show success message after brief delay
+  // Form submits to Mailchimp in background via target="_blank"
+  setTimeout(() => {
+    document.querySelector('.form-group').style.display = 'none';
+    document.querySelector('.form-note').style.display = 'none';
+    success.style.display = 'block';
+  }, 800);
+}
+
+/* ── SMOOTH SECTION LINK ─────────────────────────────────────── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>
